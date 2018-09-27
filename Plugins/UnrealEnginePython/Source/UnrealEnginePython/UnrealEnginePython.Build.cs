@@ -8,7 +8,7 @@ public class UnrealEnginePython : ModuleRules
 {
 
     // leave this string as empty for triggering auto-discovery of python installations...
-    private string pythonHome = "C:/Users/ryo50/Anaconda3";
+    private string pythonHome = "C:/Users/ryo50/anaconda3";
     // otherwise specify the path of your python installation
     //private string pythonHome = "C:/Program Files/Python36";
     // this is an example for Homebrew on Mac
@@ -22,9 +22,10 @@ public class UnrealEnginePython : ModuleRules
         "C:/Program Files/Python36",
         "C:/Program Files/Python35",
         "C:/Python27",
+        "C:/IntelPython35",
         "C:/Users/ryo50/Anaconda3",
-        "C:/Users/ryo50/Anaconda3/Scripts",
-        "C:/IntelPython35"
+        "C:/Users/ryo50/Anaconda3/Library/bin",
+        "C:/Users/ryo50/Anaconda3/Scripts"
     };
 
     private string[] macKnownPaths =
@@ -92,7 +93,7 @@ public class UnrealEnginePython : ModuleRules
 #if WITH_FORWARDED_MODULE_RULES_CTOR
     public UnrealEnginePython(ReadOnlyTargetRules Target) : base(Target)
 #else
-    public UnrealEnginePython(TargetInfo Target)
+    public UnrealEnginePython(ReadyOnlyTargetRules Target) : base (Target)
 #endif
     {
 
@@ -353,13 +354,13 @@ public class UnrealEnginePython : ModuleRules
         // first try with python3
         for (int i = 9; i >= 0; i--)
         {
-            string fileName = string.Format("libpython3.{0}.dylib", i);
+            string fileName = string.Format("libpython3.{0}.3.1.0.dylib", i);
             string fullPath = Path.Combine(basePath, "lib", fileName);
             if (File.Exists(fullPath))
             {
                 return fullPath;
             }
-            fileName = string.Format("libpython3.{0}m.dylib", i);
+            fileName = string.Format("libpython3.{0}m.3.1.0.dylib", i);
             fullPath = Path.Combine(basePath, "lib", fileName);
             if (File.Exists(fullPath))
             {
@@ -370,13 +371,13 @@ public class UnrealEnginePython : ModuleRules
         // then python2
         for (int i = 9; i >= 0; i--)
         {
-            string fileName = string.Format("libpython2.{0}.dylib", i);
+            string fileName = string.Format("libpython2.{0}.3.1.0.dylib", i);
             string fullPath = Path.Combine(basePath, "lib", fileName);
             if (File.Exists(fullPath))
             {
                 return fullPath;
             }
-            fileName = string.Format("libpython2.{0}m.dylib", i);
+            fileName = string.Format("libpython2.{0}m.3.1.0.dylib", i);
             fullPath = Path.Combine(basePath, "lib", fileName);
             if (File.Exists(fullPath))
             {
@@ -384,7 +385,7 @@ public class UnrealEnginePython : ModuleRules
             }
         }
 
-        throw new System.Exception("Invalid Python installation, missing .dylib files");
+        throw new System.Exception("Invalid Python installation, missing .3.1.0.dylib files");
     }
 
     private string GetWindowsPythonLibFile(string basePath)

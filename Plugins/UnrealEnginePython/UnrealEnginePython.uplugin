@@ -17,8 +17,8 @@
   "Modules": [
     {
       "Name": "UnrealEnginePython",
-      "Type": "Runtime",
-      "LoadingPhase": "Default"
+      "Type": "Editor",
+      "LoadingPhase": "PreDefault"
     },
     {
       "Name": "PythonAutomation",

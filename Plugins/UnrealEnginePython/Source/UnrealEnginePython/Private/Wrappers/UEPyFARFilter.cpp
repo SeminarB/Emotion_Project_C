@@ -125,8 +125,6 @@ static int ue_py_farfilter_init(ue_PyFARFilter *self, PyObject *args, PyObject *
 
 static void ue_py_farfilter_dealloc(ue_PyFARFilter *self)
 {
-	self->filter.~FARFilter();
-
 	Py_XDECREF(self->class_names);
 	Py_XDECREF(self->object_paths);
 	Py_XDECREF(self->package_names);
@@ -134,8 +132,11 @@ static void ue_py_farfilter_dealloc(ue_PyFARFilter *self)
 	Py_XDECREF(self->recursive_classes_exclusion_set);
 	Py_XDECREF(self->tags_and_values);
 
-
+#if PY_MAJOR_VERSION < 3
+	self->ob_type->tp_free((PyObject*)self);
+#else
 	Py_TYPE(self)->tp_free((PyObject*)self);
+#endif
 }
 
 static PyObject * ue_py_farfilter_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
@@ -145,9 +146,6 @@ static PyObject * ue_py_farfilter_new(PyTypeObject *type, PyObject *args, PyObje
 	self = (ue_PyFARFilter *)type->tp_alloc(type, 0);
 	if (self != NULL)
 	{
-
-		new(&self->filter) FARFilter();
-
 		self->class_names = PyList_New(0);
 		if (self->class_names == NULL)
 		{
@@ -176,7 +174,7 @@ static PyObject * ue_py_farfilter_new(PyTypeObject *type, PyObject *args, PyObje
 			return NULL;
 		}
 
-		self->recursive_classes_exclusion_set = PySet_New(NULL);
+		self->recursive_classes_exclusion_set = PySet_New(0);
 		if (self->recursive_classes_exclusion_set == NULL)
 		{
 			Py_DECREF(self);
@@ -184,41 +182,26 @@ static PyObject * ue_py_farfilter_new(PyTypeObject *type, PyObject *args, PyObje
 		}
 
 		PyObject *collections = PyImport_ImportModule("collections");
-		if (!collections)
-		{
-			unreal_engine_py_log_error();
-			Py_DECREF(self);
-			return NULL;
-		}
 		PyObject *collections_module_dict = PyModule_GetDict(collections);
 		PyObject *defaultdict_cls = PyDict_GetItemString(collections_module_dict, "defaultdict");
 
-
-		PyObject *builtins_module = PyImport_ImportModule("builtins");
-		if (!builtins_module)
-		{
-			unreal_engine_py_log_error();
-			Py_DECREF(self);
-			return NULL;
-		}
+		PyObject *main_module = PyImport_ImportModule("__main__");
+		PyObject *main_dict = PyModule_GetDict(main_module);
+		PyObject *builtins_module = PyDict_GetItemString(main_dict, "__builtins__");
 		PyObject *builtins_dict = PyModule_GetDict(builtins_module);
 		PyObject *set_cls = PyDict_GetItemString(builtins_dict, "set");
-		// required because PyTuple_SetItem below will steal a reference
-		Py_INCREF(set_cls);
-		
 
 		PyObject *py_args = PyTuple_New(1);
 		PyTuple_SetItem(py_args, 0, set_cls);
 		PyObject *default_dict = PyObject_CallObject(defaultdict_cls, py_args);
-		Py_DECREF(py_args);
-		if (!default_dict)
+		Py_XDECREF(py_args);
+
+		self->tags_and_values = default_dict;
+		if (self->tags_and_values == NULL)
 		{
-			unreal_engine_py_log_error();
 			Py_DECREF(self);
 			return NULL;
 		}
-
-		self->tags_and_values = default_dict;
 	}
 
 	return (PyObject *)self;

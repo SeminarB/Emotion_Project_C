@@ -3,14 +3,40 @@
 	"EngineAssociation": "4.20",
 	"Category": "",
 	"Description": "",
-	"Modules": [
-		{
-			"Name": "Emotion_Project_C",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine"
-			]
-		}
+  "Modules": [
+    {
+      "Name": "Emotion_Project_C",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine"
+      ]
+    },
+    {
+      "Name": "UnrealEnginePython",
+      "Type": "Runtime",
+      "LoadingPhase": "PreDefault"
+    },
+    {
+      "Name": "PythonAutomation",
+      "Type": "Editor",
+      "LoadingPhase": "PostDefault"
+    },
+    {
+      "Name": "PythonConsole",
+      "Type": "Editor",
+      "LoadingPhase": "PostDefault"
+    },
+    {
+      "Name": "PythonEditor",
+      "Type": "Editor",
+      "LoadingPhase": "PostDefault"
+    }
+	],
+	"Plugins": [
+    {
+      "Name": "PythonScriptPlugin",
+      "Enabled": true
+    }
 	]
 }

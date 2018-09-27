@@ -9,6 +9,6 @@ public class Emotion_Project_CTarget : TargetRules
 	{
 		Type = TargetType.Game;
 
-		ExtraModuleNames.AddRange( new string[] { "Emotion_Project_C" } );
+		ExtraModuleNames.Add("Emotion_Project_C");
 	}
 }
