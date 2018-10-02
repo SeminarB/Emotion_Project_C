@@ -5,8 +5,5 @@ xxx = input()
 print(xxx,"が入力されました。")
 ret = model.wv.most_similar(positive = xxx ) 
 
-def Answer():
-    print("実行できてます。")
-
 for item in ret:
     print(item[0], item[1])
