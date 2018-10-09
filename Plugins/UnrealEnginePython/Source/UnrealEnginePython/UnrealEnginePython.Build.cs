@@ -8,7 +8,7 @@ public class UnrealEnginePython : ModuleRules
 {
 
     // leave this string as empty for triggering auto-discovery of python installations...
-    private string pythonHome = "C:/Users/ryo50/anaconda3";
+    private string pythonHome = "C:/Users/ryo50/Anaconda3";
     private string pythonlib = "C:/Users/ryo50/Documents/GitHub/Emotion_Project_C/Plugins/UnrealEnginePython/Intermediate/Build/Win64/UE4Editor/Development/UnrealEnginePython";
     // otherwise specify the path of your python installation
     //private string pythonHome = "C:/Program Files/Python36";
