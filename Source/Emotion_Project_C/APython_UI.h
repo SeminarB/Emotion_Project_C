@@ -3,15 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/HUD.h"
-#include "APython_HUD.generated.h"
+#include "Blueprint/UserWidget.h"
+#include "APython_UI.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class EMOTION_PROJECT_C_API AAPython_HUD : public AHUD
+class EMOTION_PROJECT_C_API UAPython_UI : public UUserWidget
 {
 	GENERATED_BODY()
-
+	
+	
+	
+	
 };
