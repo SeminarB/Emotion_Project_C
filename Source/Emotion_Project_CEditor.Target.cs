@@ -9,6 +9,6 @@ public class Emotion_Project_CEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 
-		ExtraModuleNames.Add("Emotion_Project_C");
+		ExtraModuleNames.AddRange( new string[] { "Emotion_Project_C" } );
 	}
 }
