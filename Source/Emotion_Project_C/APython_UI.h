@@ -14,8 +14,9 @@ class EMOTION_PROJECT_C_API UAPython_UI : public UUserWidget
 {
 	GENERATED_BODY()
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Switch Variables")
-	text DesiredIntensity;
+	public:
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Switch Variables")
+		Ftext DesiredIntensity;
 	
 	
 };
