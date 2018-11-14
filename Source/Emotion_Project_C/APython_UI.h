@@ -15,8 +15,6 @@ class EMOTION_PROJECT_C_API UAPython_UI : public UUserWidget
 	GENERATED_BODY()
 	
 	public:
-		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Python_String")
-		FText DesiredIntensity;
-	
-	
+		UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Transient, Category = "Python")
+		FText DisplayText;
 };
