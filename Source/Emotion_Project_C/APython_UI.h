@@ -16,5 +16,5 @@ class EMOTION_PROJECT_C_API UAPython_UI : public UUserWidget
 	
 	public:
 		UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Transient, Category = "Python")
-		FText DisplayText;
+		FString DisplayText;
 };
