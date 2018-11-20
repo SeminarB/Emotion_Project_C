@@ -15,6 +15,9 @@ class EMOTION_PROJECT_C_API UAPython_UI : public UUserWidget
 	GENERATED_BODY()
 	
 	public:
-		UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Transient, Category = "Python")
+		UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Python")
 		FString DisplayText;
+
+		UFUNCTION(BlueprintCallable, Category = "Widgets|Python")
+		FString GetDisplayText();
 };
