@@ -20,10 +20,6 @@
 		{
 			"Name": "CodeEditor",
 			"Enabled": true
-		},
-		{
-			"Name": "PythonScriptPlugin",
-			"Enabled": true
 		}
 	]
 }
