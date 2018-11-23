@@ -3,7 +3,7 @@ from gtts import gTTS
 import pygame
 import time
 import re
-input(">>>")
+#input(">>>")
 tts = gTTS("こんにちは",lang='ja') #音声作成
 tts.save('ko01.mp3')
 filename = 'ko01.mp3' #再生したいmp3ファイル
